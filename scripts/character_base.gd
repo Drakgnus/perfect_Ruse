@@ -142,8 +142,8 @@ func _process(delta: float) -> void:
 		var nervous := clampf((suspicion - TREMOR_SUSPICION_THRESHOLD) / 60.0, 0.0, 1.0)
 		if nervous > 0.02:
 			var amp := nervous * 0.05
-			visual_holder.position = Vector3(randf_range(-amp, amp), randf_range(-amp, amp) * 0.5, randf_range(-amp, amp))
-			visual_holder.rotation.z = randf_range(-amp, amp) * 1.5
+			visual_holder.position = Vector3(randf_range(-amp, amp), 0.0, randf_range(-amp, amp))
+			visual_holder.rotation.z = 0.0 # Keep soles on the support plane; horizontal tremor remains.
 			# Olha de um lado para o outro sem girar o personagem de fato: a
 			# direcao de movimento continua sob controle do jogador/IA.
 			nervous_tell_time += delta

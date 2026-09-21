@@ -1,0 +1,14 @@
+{
+	"ai_carrying_clue_for_one_hidden_real": true,
+	"ai_selects_registered_prop": true,
+	"goal": 1500,
+	"hidden_money": 0,
+	"money_with_250_each": 1750,
+	"ordinary_prop_inspectable": false,
+	"phase_with_only_carried_money": "thieves_won",
+	"player_suspicion_after_10_seconds": 0.0,
+	"same_prop_registered_as_decoy_inspectable": true,
+	"thieves": 7,
+	"vision_front_dot_target": -1.0,
+	"visual_front_dot_target": 1.0
+}

@@ -4,15 +4,20 @@ extends RefCounted
 const MODEL := preload("res://assets/models/characters/modular/citizen.glb")
 const HATS := {"cap": "Cap", "beanie": "Beanie", "cowboy": "Cowboy", "tophat": "Cowboy", "helmet": "Helmet", "headphones": "Headphones", "police": "PoliceCap"}
 const OPTIONAL := ["Cap", "Beanie", "Cowboy", "Helmet", "Headphones", "PoliceCap", "PoliceBadge", "PoliceBelt", "PoliceBuckle", "Bag", "Hair", "HairBob", "HairBun", "Glasses", "Jacket"]
+const CONTACT = preload("res://scripts/ground_contact_profiles.gd")
 static var material_cache: Dictionary = {}
+static var contact_libraries: Dictionary = {}
 
 static func build(outfit: Dictionary, undressed: bool = false) -> Node3D:
 	var holder := Node3D.new()
 	holder.name = "ModularVisual"
 	var model: Node3D = MODEL.instantiate()
 	model.name = "Citizen"
-	# Author's source faces +Z after glTF conversion. Feet sit 3.8 cm below origin.
-	model.position.y = 0.038
+	model.set_script(preload("res://scripts/character_contact.gd"))
+	# Contact is sampled from animated soles, rather than the rest-pose AABB.
+	var kind := "bare" if undressed else "shoes"
+	model.position.y = float(CONTACT.DATA[kind]["idle"]["offsets"][0])
+	_apply_contact_animation(model, kind)
 	holder.add_child(model)
 	var is_police: bool = outfit.get("hat", "none") == "police"
 	var active_hat: String = HATS.get(str(outfit.get("hat", "none")), "")
@@ -52,6 +57,26 @@ static func build(outfit: Dictionary, undressed: bool = false) -> Node3D:
 			mesh.set_surface_override_material(index, material_cache[cache_key])
 	return holder
 
+# One shared immutable library per footwear state; no baking/readback in gameplay.
+static func _apply_contact_animation(model: Node3D, kind: String) -> void:
+	var ap := animation_player(model)
+	if not contact_libraries.has(kind):
+		var library := AnimationLibrary.new()
+		for name in ap.get_animation_list():
+			var clip: Animation = ap.get_animation(name).duplicate()
+			if CONTACT.DATA[kind].has(str(name)):
+				var profile: Dictionary = CONTACT.DATA[kind][str(name)]
+				var offsets: Array = profile["offsets"]
+				var track := clip.add_track(Animation.TYPE_VALUE)
+				clip.track_set_path(track, NodePath(".:position"))
+				for i in offsets.size():
+					clip.track_insert_key(track, float(profile["duration"]) * i / (offsets.size() - 1), Vector3(0, float(offsets[i]), 0))
+			library.add_animation(name, clip)
+		contact_libraries[kind] = library
+	for name in ap.get_animation_library_list():
+		ap.remove_animation_library(name)
+	ap.add_animation_library("", contact_libraries[kind])
+
 static func animation_player(model: Node3D) -> AnimationPlayer:
 	return model.find_child("AnimationPlayer", true, false) as AnimationPlayer
 
@@ -63,4 +88,5 @@ static func play_motion(anim: AnimationPlayer, speed: float, stopped: bool) -> v
 		if anim.has_animation(clip):
 			anim.get_animation(clip).loop_mode = Animation.LOOP_LINEAR
 			anim.play(clip, 0.18)
+			anim.get_node(anim.root_node).begin_contact_blend(0.20)
 	anim.speed_scale = 1.0 if clip == "idle" else clampf(speed / (4.6 if clip == "run" else 1.6), 0.65, 1.65)

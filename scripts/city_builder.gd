@@ -26,9 +26,11 @@ const MAP_HALF := 2.0 * ROAD_SPACING
 const BLOCK_HALF := 0.5 * ROAD_SPACING - (ROAD_HALF + SIDEWALK_W)
 # Centro da faixa de calcada, medido a partir do eixo da rua.
 const SIDEWALK_MID := ROAD_HALF + SIDEWALK_W * 0.5
+const ROAD_SURFACE_Y := 0.008
 const SIDEWALK_H := 0.12   # altura da calcada; acima disso o personagem nao sobe sem rampa
 # Do centro do lote ate a borda interna da calcada: 12 - (ROAD_HALF + 2.2) = 6.3.
 # Nada do quarteirao pode passar disso, senao invade calcada/rua.
+const PARKING_SURFACE_Y := SIDEWALK_H + 0.018 + 0.025 * 0.5
 const CAR_WIDTH := 2.0
 const CAR_LENGTH := 4.2
 const PARK_LANE_OFFSET := ROAD_HALF + 1.2
@@ -505,7 +507,7 @@ static func _add_car(root: Node3D, position_3d: Vector3, yaw: float) -> void:
 	body.name = "Car"
 	body.add_to_group("road_vehicles")
 	body.add_to_group("parked_cars")
-	body.position = position_3d + Vector3(0, SIDEWALK_H, 0)
+	body.position = position_3d + Vector3(0, PARKING_SURFACE_Y, 0)
 	body.rotation_degrees.y = yaw
 	var size := Vector3(CAR_WIDTH, 1.2, CAR_LENGTH)
 	if ModelLibrary.has_cars():
@@ -521,7 +523,7 @@ static func _add_car(root: Node3D, position_3d: Vector3, yaw: float) -> void:
 		mesh.size = Vector3(1.9, 1.1, 4.0)
 		mesh.material = Palette.flat_material(Palette.random_civilian_color())
 		mesh_instance.mesh = mesh
-		mesh_instance.position.y = 0.7
+		mesh_instance.position.y = mesh.size.y * 0.5
 		body.add_child(mesh_instance)
 	var collision := CollisionShape3D.new()
 	var shape := BoxShape3D.new()

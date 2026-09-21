@@ -37,9 +37,9 @@ func _ready() -> void:
 	# Faixa da direita em relacao a direcao.
 	var lane_off := LANE * dir_sign * (1.0 if travel_is_x else -1.0)
 	if travel_is_x:
-		position = Vector3(position.x, 0.15, road_line + lane_off)
+		position = Vector3(position.x, CityBuilder.ROAD_SURFACE_Y, road_line + lane_off)
 	else:
-		position = Vector3(road_line + lane_off, 0.15, position.z)
+		position = Vector3(road_line + lane_off, CityBuilder.ROAD_SURFACE_Y, position.z)
 
 	# Resolve random spawn conflicts before the first physics tick.
 	for slot in [-CityBuilder.MAP_HALF + 6.0, -CityBuilder.ROAD_SPACING * 0.5, CityBuilder.ROAD_SPACING * 0.5, CityBuilder.MAP_HALF - 6.0, -CityBuilder.ROAD_SPACING * 1.5, CityBuilder.ROAD_SPACING * 1.5, -CityBuilder.ROAD_SPACING * 1.25, CityBuilder.ROAD_SPACING * 1.25]:
@@ -65,7 +65,7 @@ func _build_visual() -> void:
 		mesh.size = Vector3(1.9, 1.1, 4.0)
 		mesh.material = Palette.flat_material(Palette.random_civilian_color())
 		mesh_instance.mesh = mesh
-		mesh_instance.position.y = 0.7
+		mesh_instance.position.y = mesh.size.y * 0.5
 		add_child(mesh_instance)
 	var collision := CollisionShape3D.new()
 	var shape := BoxShape3D.new()

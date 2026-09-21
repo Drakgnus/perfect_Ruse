@@ -1,3 +1,5 @@
+> Continuação atual: [handoff para o Claude](docs/CLAUDE_HANDOFF.md). Issue #2 implementada; avaliação de gameplay e lançamento nas issues #10–#15.
+
 > Atualização 21/09/2026: este arquivo é histórico. O pedido atual e a próxima sequência estão em [docs/BACKLOG.md](docs/BACKLOG.md) e [docs/URBAN_GAMEPLAY_PLAN.md](docs/URBAN_GAMEPLAY_PLAN.md). A evolução visual solicitada será validada com o personagem chibi; as restrições artísticas antigas não substituem esse pedido. Nenhuma proposta nova foi implementada ainda.
 
 # Perfect Ruse — Backlog para o Codex

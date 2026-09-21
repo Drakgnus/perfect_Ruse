@@ -2,11 +2,20 @@
 
 ## Leitura antes de implementar
 
+0. [Handoff atual para o Claude](CLAUDE_HANDOFF.md).
 1. [README do projeto](../README.md).
 2. [Plano urbano e de gameplay](URBAN_GAMEPLAY_PLAN.md): pedido atual, diagnóstico, sequência e critérios.
 3. [Backlog oficial](BACKLOG.md): issues, dependências e estado.
 4. [Direção visual](ART_DIRECTION.md) para modelos, materiais e moldes.
 5. Documentos específicos abaixo, considerando suas datas e revisões.
+
+## Implementação recente
+
+- [Correção do contato com o chão](GROUND_CONTACT.md).
+
+## Avaliação atual
+
+- [Mecânicas, balanceamento e critérios de lançamento](GAMEPLAY_RELEASE_REVIEW.md).
 
 ## Estado implementado e histórico
 

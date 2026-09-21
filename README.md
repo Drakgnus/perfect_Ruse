@@ -10,7 +10,7 @@ Abra `project.godot` no Godot compatível com a versão usada pelo projeto (vali
 
 Comece por [docs/README.md](docs/README.md). A direção solicitada em 21/09/2026 está em [análise urbana e visual](docs/URBAN_GAMEPLAY_PLAN.md), com [critérios de assets](docs/ART_DIRECTION.md) e [backlog](docs/BACKLOG.md).
 
-As propostas estão planejadas, não implementadas. O GitHub Issues passa a organizar a execução; `CODEX_QUEUE.md` e `CODEX_TASKS.md` preservam o histórico.
+A correção de contato com o chão (#2) foi implementada; as demais propostas seguem planejadas. Consulte [o handoff para o Claude](docs/CLAUDE_HANDOFF.md) e [a avaliação de lançamento](docs/GAMEPLAY_RELEASE_REVIEW.md). O GitHub Issues passa a organizar a execução; `CODEX_QUEUE.md` e `CODEX_TASKS.md` preservam o histórico.
 
 ## Validar
 

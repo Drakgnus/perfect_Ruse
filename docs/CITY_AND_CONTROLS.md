@@ -1,3 +1,5 @@
+> Atualização 21/09/2026: [apoio de personagens e carros corrigido na issue #2](GROUND_CONTACT.md). O restante da evolução urbana segue planejado.
+
 > Próxima evolução planejada em 21/09/2026: [bairro, perseguição e visual](URBAN_GAMEPLAY_PLAN.md). O texto abaixo documenta entregas anteriores; a proposta nova ainda não está implementada.
 
 # Cidade, rotas, pausa e colocação livre — 20/09/2026
