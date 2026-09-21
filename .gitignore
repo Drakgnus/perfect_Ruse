@@ -1,0 +1,19 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Assets temporarios de download
+assets/_downloads/
+
+# Estado local e arquivos regeneráveis
+runtime-profile/
+.agents/
+*.log
+!docs/**/*.log
+*.blend1
+*.blend2
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
